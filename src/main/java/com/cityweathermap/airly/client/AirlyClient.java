@@ -56,7 +56,6 @@ public class AirlyClient {
         URI url = UriComponentsBuilder.fromHttpUrl(airlyConfig.getAirlyEndpoint() + "/v2/installations/" + city + "/")
                 .queryParam("apikey", airlyConfig.getAirlyApiKey())
                 .build().encode().toUri();
-        System.out.println(url);
         return url;
     }
 }

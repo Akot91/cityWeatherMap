@@ -17,12 +17,16 @@ public class InstallationDto {
     @JsonProperty(value = "values")
     private List<ValueDto> values;
 
+    @JsonProperty(value = "indexes")
+    private List<IndexesDto> indexes;
+
     public InstallationDto() {}
 
-    public InstallationDto(String fromDateTime, String tillDateTime, List<ValueDto> values) {
+    public InstallationDto(String fromDateTime, String tillDateTime, List<ValueDto> values, List<IndexesDto> indexes) {
         this.fromDateTime = fromDateTime;
         this.tillDateTime = tillDateTime;
         this.values = values;
+        this.indexes = indexes;
     }
 
     public String getFromDateTime() {
@@ -35,5 +39,9 @@ public class InstallationDto {
 
     public List<ValueDto> getValues() {
         return values;
+    }
+
+    public List<IndexesDto> getIndexes() {
+        return indexes;
     }
 }
