@@ -29,4 +29,8 @@ public class DbService {
     public void deleteCityList(final Long id) {
         cityListRepository.deleteById(id);
     }
+
+    public long size() {
+        return cityListRepository.count();
+    }
 }

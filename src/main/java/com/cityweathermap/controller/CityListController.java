@@ -31,6 +31,11 @@ public class CityListController {
         return cityListMapper.mapToCityListDto(dbService.findCityListById(listId).orElseThrow(CityListNotFoundException::new));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/lists/size")
+    public long getSize() {
+        return dbService.size();
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/lists", consumes = APPLICATION_JSON_VALUE)
     public void createCityList(@RequestBody CityListDto cityListDto) {
         dbService.saveCityList(cityListMapper.mapToCityList(cityListDto));

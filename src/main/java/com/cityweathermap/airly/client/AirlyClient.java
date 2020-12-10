@@ -2,9 +2,10 @@ package com.cityweathermap.airly.client;
 
 import com.cityweathermap.airly.config.AirlyConfig;
 import com.cityweathermap.config.CitiesConfiguration;
+import com.cityweathermap.controller.CityListController;
+import com.cityweathermap.controller.CityListNotFoundException;
 import com.cityweathermap.domain.CityDto;
 import com.cityweathermap.domain.CurrentDto;
-import com.cityweathermap.domain.CurrentInstallations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -26,18 +27,23 @@ public class AirlyClient {
     private AirlyConfig airlyConfig;
 
     @Autowired
+    private CityListController cityListController;
+
+    @Autowired
     private CitiesConfiguration citiesConfiguration;
 
-    public List<CurrentDto> getInstallations() {
+    public List<CurrentDto> getInstallations(Long id) throws CityListNotFoundException {
         List<CurrentDto> currentDtos = new ArrayList<>();
+        citiesConfiguration.createNewConfiguration(cityListController.getCityList(id));
         for (Integer city : citiesConfiguration.getCities()) {
             currentDtos.addAll(Arrays.asList(Optional.ofNullable(restTemplate.getForObject(getInstallationUrl(city), CurrentDto.class)).orElseGet(() -> new CurrentDto())));
         }
         return currentDtos;
     }
 
-    public List<CityDto> getCities() {
+    public List<CityDto> getCities(Long id) throws CityListNotFoundException {
         List<CityDto> cityDtos = new ArrayList<>();
+        citiesConfiguration.createNewConfiguration(cityListController.getCityList(id));
         for (Integer city : citiesConfiguration.getCities()) {
             cityDtos.addAll(Arrays.asList(Optional.ofNullable(restTemplate.getForObject(getCityUrl(city), CityDto.class)).orElseGet(() -> new CityDto())));
         }
