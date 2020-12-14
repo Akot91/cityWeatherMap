@@ -27,4 +27,5 @@ public class AddressDto {
     public String getStreet() {
         return street;
     }
+
 }
