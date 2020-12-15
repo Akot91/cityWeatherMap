@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/airly/installations")
 public class AirlyController {
 
@@ -20,27 +20,40 @@ public class AirlyController {
     @Autowired
     private CurrentInstallations currentInstallations;
 
-    public List<CurrentDto> getCreatedCurrentInstallations() throws CityListNotFoundException {
+    public List<CurrentDto> getCreatedCurrentInstallations(Long id) throws CityListNotFoundException {
         if (currentInstallations.getCurrentDtos().isEmpty()) {
-            currentInstallations.createCurrentDtos(airlyClient.getInstallations(1L));
+            currentInstallations.createCurrentDtos(airlyClient.getInstallations(id));
         }
         return currentInstallations.getCurrentDtos();
     }
 
-    public List<CityDto> getCreatedCurrentCities() throws CityListNotFoundException {
+    public List<CityDto> getAllCities() {
+        if (currentInstallations.getAllCities().isEmpty()) {
+            currentInstallations.createAllCities(airlyClient.getAllEnabledCities(currentInstallations.getAllCityIndexes()));
+        }
+        return currentInstallations.getAllCities();
+    }
+
+    public List<CityDto> getCreatedCurrentCities(Long id) throws CityListNotFoundException {
         if (currentInstallations.getCityDtos().isEmpty()) {
-            currentInstallations.createCityDtos(airlyClient.getCities(1L));
+            currentInstallations.createCityDtos(airlyClient.getCities(id));
         }
         return currentInstallations.getCityDtos();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public List<CurrentDto> getInstallations() throws CityListNotFoundException {
-        return getCreatedCurrentInstallations();
+    @RequestMapping(method = RequestMethod.GET, value = "/chosenInstallations")
+    public List<CurrentDto> getInstallations(@RequestParam Long id) throws CityListNotFoundException {
+        return getCreatedCurrentInstallations(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/test2")
-    public List<CityDto> getCities() throws CityListNotFoundException {
-        return getCreatedCurrentCities();
+    @RequestMapping(method = RequestMethod.GET, value = "/chosenCities")
+    public List<CityDto> getCities(@RequestParam Long id) throws CityListNotFoundException {
+        return getCreatedCurrentCities(id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/allCities")
+    public List<CityDto> getAllEnabledCities() {
+            return getAllCities();
+    }
+
 }

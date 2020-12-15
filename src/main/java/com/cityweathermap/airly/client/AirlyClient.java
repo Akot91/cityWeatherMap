@@ -50,6 +50,14 @@ public class AirlyClient {
         return cityDtos;
     }
 
+    public List<CityDto> getAllEnabledCities(List<Integer> cityIndexes) {
+        List<CityDto> cityDtos = new ArrayList<>();
+        for (Integer city : cityIndexes) {
+            cityDtos.addAll(Arrays.asList(Optional.ofNullable(restTemplate.getForObject(getCityUrl(city), CityDto.class)).orElseGet(() -> new CityDto())));
+        }
+        return cityDtos;
+    }
+
     private URI getInstallationUrl(Integer city) {
         URI url = UriComponentsBuilder.fromHttpUrl(airlyConfig.getAirlyEndpoint() + "/v2/measurements/installation/")
                 .queryParam("apikey", airlyConfig.getAirlyApiKey())
