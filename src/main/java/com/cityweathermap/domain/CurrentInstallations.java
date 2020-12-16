@@ -16,14 +16,14 @@ public class CurrentInstallations {
     private List<CityDto> allCities = new ArrayList<>();
 
     public void createCityDtos(List<CityDto> cityDtos) {
-        cityDtos.addAll(cityDtos);
+        this.cityDtos.addAll(cityDtos);
     }
 
     public void createCurrentDtos(List<CurrentDto> currentDtos) {
-        currentDtos.addAll(currentDtos);
+        this.currentDtos.addAll(currentDtos);
     }
 
-    public void createAllCities(List<CityDto> cityDtos) {allCities.addAll(cityDtos);}
+    public void createAllCities(List<CityDto> allCities) {this.allCities.addAll(cityDtos);}
 
     public List<CityDto> getCityDtos() {
         return cityDtos;
@@ -36,4 +36,12 @@ public class CurrentInstallations {
     public List<CityDto> getAllCities() {return allCities;}
 
     public List<Integer> getAllCityIndexes() {return allCityIndexes;}
+
+    public void clearCurrendDtos() {
+        currentDtos = new ArrayList<>();
+    }
+
+    public void clearCityDtos() {
+        cityDtos = new ArrayList<>();
+    }
 }
