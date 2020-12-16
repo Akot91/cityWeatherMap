@@ -68,5 +68,4 @@ public class AirlyController {
     public List<CityDto> getAllEnabledCities() {
             return getAllCities();
     }
-
 }
