@@ -23,7 +23,7 @@ public class CurrentInstallations {
         this.currentDtos.addAll(currentDtos);
     }
 
-    public void createAllCities(List<CityDto> allCities) {this.allCities.addAll(cityDtos);}
+    public void createAllCities(List<CityDto> allCities) {this.allCities.addAll(allCities);}
 
     public List<CityDto> getCityDtos() {
         return cityDtos;
