@@ -12,12 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AirlyConfigTestSuite {
 
     @Autowired
-    private AirlyConfig airlyConfig;
+    private AirlyConfig testee;
 
     @Test
     public void shouldReturnAirlyApiKey() {
         //Given When
-        String result = airlyConfig.getAirlyApiKey();
+        String result = testee.getAirlyApiKey();
 
         // Then
         Assert.assertEquals("8wnhVgmtnchS3OFLBJiUYIrnLHiGJZw2", result);
@@ -26,7 +26,7 @@ public class AirlyConfigTestSuite {
     @Test
     public void shouldReturnAirlyEndpoint() {
         //Given When
-        String result = airlyConfig.getAirlyEndpoint();
+        String result = testee.getAirlyEndpoint();
 
         //Then
         Assert.assertEquals("https://airapi.airly.eu", result);
