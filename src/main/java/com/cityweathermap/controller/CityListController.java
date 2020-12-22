@@ -40,4 +40,9 @@ public class CityListController {
     public void createCityList(@RequestBody CityListDto cityListDto) {
         dbService.saveCityList(cityListMapper.mapToCityList(cityListDto));
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/lists/{listId}")
+    public void deleteCityList(@PathVariable long listId) {
+        dbService.deleteCityList(listId);
+    }
 }
