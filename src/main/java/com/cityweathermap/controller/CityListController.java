@@ -45,4 +45,5 @@ public class CityListController {
     public void deleteCityList(@PathVariable long listId) {
         dbService.deleteCityList(listId);
     }
+
 }
